@@ -5,6 +5,7 @@ import SetTitle from "../hook/SetTitle";
 import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
 
 export default function Login() {
+  const VITE_API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -20,10 +21,11 @@ export default function Login() {
 
     try {
       setLoading(true);
-      const { data } = await axios.post("/api/auth/login", { username, password });
+      const { data } = await axios.post(VITE_API_URL + "/api/auth/login", { username, password });
       localStorage.setItem("token", data.token);
       toast.success(`Welcome, ${data.user.username}!`);
       // Redirect or update app state here
+      window.location.href = "/dashboard";
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Login failed");
