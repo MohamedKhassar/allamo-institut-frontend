@@ -23,7 +23,7 @@ const LinksLayout = () => {
   return (
     <aside className={`flex flex-col justify-between bg-white p-5 lg:h-lvh md:h-dvh h-svh border-r border-black/20 sticky top-0 left-0 
   ${expandLink ? "lg:w-70 md:w-50 w-24" : "w-24"}
-  sm:w-16 sm:p-3
+  sm:w-20 sm:p-3
   transition-all duration-500`}>
 
       <ChevronRight className={`absolute -right-4.5 cursor-pointer hover:bg-slate-50 p-1 bg-white rounded-full border border-slate-300 transition-all duration-500 hidden md:block ${expandLink ? 'rotate-180' : ''}`}
@@ -69,17 +69,17 @@ const LinksLayout = () => {
             <span className="max-sm:hidden overflow-hidden text-ellipsis block w-full">
               Réalisé par
               <span className="font-medium text-gray-500 underline underline-offset-2 ms-1">
-                <Link to="https://mohamed-khassar.vercel.app/">Mohamed Khassar</Link>
+                <Link target='_blanket' to="https://mohamed-khassar.vercel.app/">Mohamed Khassar</Link>
               </span>
             </span>
             {/* On small screens show icon even when expanded */}
-            <Link className='group relative max-sm:block hidden mx-auto!' to="https://mohamed-khassar.vercel.app/">
+            <Link className='group relative max-sm:block hidden mx-auto!' target='_blanket' to="https://mohamed-khassar.vercel.app/">
               <Link2Icon />
               <span className='dashboard-tooltip'>Mohamed Khassar</span>
             </Link>
           </>
         ) : (
-          <Link className='group relative mx-auto!' to="https://mohamed-khassar.vercel.app/">
+          <Link className='group relative mx-auto!' target='_blanket' to="https://mohamed-khassar.vercel.app/">
             <Link2Icon />
             <span className='dashboard-tooltip'>Mohamed Khassar</span>
           </Link>
