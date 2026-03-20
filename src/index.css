@@ -8,3 +8,14 @@
 body{
     @apply font-Poppins;
 }
+
+.dashboard-link{
+    @apply w-full bg-slate-100 px-5 py-3 hover:bg-slate-200 transition-colors duration-300 cursor-pointer rounded-xl block overflow-hidden text-nowrap font-medium;
+}
+.dashboard-active-link{
+    @apply w-full bg-slate-300 px-5 py-3 transition-colors duration-300 cursor-pointer rounded-xl block overflow-hidden text-nowrap font-medium;
+}
+
+.dashboard-tooltip{
+    @apply absolute ms-5 left-full top-1/2 -translate-y-1/2 bg-slate-700 text-white text-sm rounded-lg py-1.5 px-2.5 whitespace-nowrap opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100;
+}

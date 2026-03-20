@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import SetTitle from "../hook/SetTitle";
 import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const VITE_API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
@@ -10,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-
+const nav=useNavigate()
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -25,10 +26,11 @@ export default function Login() {
       localStorage.setItem("token", data.token);
       toast.success(`Welcome, ${data.user.username}!`);
       // Redirect or update app state here
-      window.location.href = "/dashboard";
+      nav("/dashboard");
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Login failed");
+      setTimeout(() => nav("/dashboard"), 500);
     } finally {
       setLoading(false);
     }
@@ -41,18 +43,18 @@ export default function Login() {
       <form onSubmit={handleLogin} className="w-120 border border-slate-300 rounded-2xl mx-auto shadow-sm shadow-black/20 px-10 py-10">
         <h1 className="text-center lg:text-xl md:text-lg text-base first-letter:capitalize font-bold mb-10">connectez-vous à votre compte</h1>
         <div className="grid gap-2 mb-7">
-          <label htmlFor="username" className="font-medium first-letter:capitalize text-gray-500">Nom d'utilisateur</label>
+          <label htmlFor="username" className="font-medium first-letter:capitalize text-gray-500 text-sm">Nom d'utilisateur</label>
           <input
             type="text"
             placeholder="Username"
             value={username}
             name="username"
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full p-2 rounded-lg outline-none border-2 border-slate-300"
+            className="w-full p-2 rounded-lg outline-none border-2 border-slate-300 text-sm"
           />
         </div>
         <div className="grid gap-2">
-          <label htmlFor="password" className="font-medium first-letter:capitalize text-gray-500">Mot de passe</label>
+          <label htmlFor="password" className="font-medium first-letter:capitalize text-gray-500 text-sm">Mot de passe</label>
           <div className="flex items-center relative">
             <input
               type={`${isPasswordVisible ? "text" : "password"}`}
@@ -60,14 +62,14 @@ export default function Login() {
               value={password}
               name="password"
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 rounded-lg outline-none border-2 border-slate-300"
+              className="w-full p-2 rounded-lg outline-none border-2 border-slate-300 text-sm"
             />
-            <button onClick={(e) => { e.preventDefault(); setIsPasswordVisible(!isPasswordVisible) }} className="absolute right-3">
+            <button onClick={(e) => { e.preventDefault(); setIsPasswordVisible(!isPasswordVisible) }} className="absolute right-3 cursor-pointer">
               {
                 isPasswordVisible ?
-                  <EyeOffIcon />
+                  <EyeOffIcon size={18} />
                   :
-                  <EyeIcon />
+                  <EyeIcon size={18} />
               }
             </button>
           </div>
